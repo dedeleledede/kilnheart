@@ -5,8 +5,16 @@ extends Node3D
 @export var attack_range := 45.0
 
 @onready var player := get_node("../Player")
+@onready var health_component := $HealthComponent
 
 var fire_timer := 0.4
+
+
+func _ready() -> void:
+	health_component.connect(
+		"died",
+		die
+	)
 
 
 func _process(delta: float) -> void:
@@ -38,6 +46,17 @@ func shoot() -> void:
 	)
 
 
+func take_damage(damage: int) -> void:
+	health_component.call(
+		"take_damage",
+		damage
+	)
+
+
 func take_hit() -> void:
+	take_damage(1)
+
+
+func die() -> void:
 	set_process(false)
 	queue_free()
