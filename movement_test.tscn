@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]
 [ext_resource type="Script" uid="uid://bpccxxlpeyb43" path="res://ui/projectile_warning.gd" id="6_n2kti"]
 [ext_resource type="Script" uid="uid://dujc3cvmuanoe" path="res://combat/health_component.gd" id="8_dsagd"]
+[ext_resource type="Script" uid="uid://dtiqkpa2pspjt" path="res://combat/damage_feedback.gd" id="9_0jnl2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h37ey"]
 size = Vector3(14, 1, 80)
@@ -131,6 +132,9 @@ shape = SubResource("BoxShape3D_h37ey")
 [node name="HealthComponent" type="Node" parent="Shooter" unique_id=1810157597]
 script = ExtResource("8_dsagd")
 max_health = 3
+
+[node name="DamageFeedback" type="Node" parent="Shooter" unique_id=714564949]
+script = ExtResource("9_0jnl2")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1010109709]
 

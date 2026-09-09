@@ -59,4 +59,9 @@ func take_hit() -> void:
 
 func die() -> void:
 	set_process(false)
+
+	await get_tree().create_timer(
+		0.22
+	).timeout
+
 	queue_free()
