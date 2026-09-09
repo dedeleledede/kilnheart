@@ -127,3 +127,10 @@ func die() -> void:
 
 	await get_tree().create_timer(0.4).timeout
 	get_tree().reload_current_scene()
+
+
+func apply_attack_impulse(impulse_speed: float) -> void:
+	velocity.z = min(
+		velocity.z,
+		-impulse_speed
+	)

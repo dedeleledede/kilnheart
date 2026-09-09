@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bwdfyfwl6vqks" path="res://player/components/parry_component.gd" id="2_httow"]
 [ext_resource type="PackedScene" uid="uid://bqqpu30qxte0q" path="res://projectile.tscn" id="3_snpff"]
 [ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_unidx"]
+[ext_resource type="Script" uid="uid://bchjqkkcbgoaw" path="res://player/components/attack_feedback.gd" id="4_u62bo"]
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]
 [ext_resource type="Script" uid="uid://bpccxxlpeyb43" path="res://ui/projectile_warning.gd" id="6_n2kti"]
 
@@ -80,6 +81,9 @@ script = ExtResource("3_unidx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/MeleeHitbox" unique_id=1590841933]
 shape = SubResource("BoxShape3D_tnlha")
+
+[node name="AttackFeedback" type="Node" parent="Player" unique_id=496532243]
+script = ExtResource("4_u62bo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1151762135]
 transform = Transform3D(0.8660254, 0.43301272, -0.25, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.4330127, 0, 0, 0)

@@ -147,4 +147,4 @@ func has_valid_attack_data() -> bool:
 		and active_window_starts.size() == count
 		and active_window_ends.size() == count
 		and attack_damages.size() == count
-	)
+	)	
