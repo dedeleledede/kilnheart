@@ -12,3 +12,15 @@ func receive_parried_projectile(_projectile: Area3D) -> void:
 
 	if enemy.has_method("take_hit"):
 		enemy.call("take_hit")
+
+
+func receive_melee_attack(
+	damage: int,
+	_hit_origin: Vector3
+) -> void:
+	var enemy := get_parent()
+
+	if enemy.has_method("take_damage"):
+		enemy.call("take_damage", damage)
+	elif enemy.has_method("take_hit"):
+		enemy.call("take_hit")

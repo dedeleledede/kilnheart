@@ -2,3 +2,13 @@
 .godot/
 /android/
 ./godot
+*.tmp
+
+builds/
+exports/
+
+.idea/
+.vscode/
+
+.DS_Store
+Thumbs.db

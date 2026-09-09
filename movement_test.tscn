@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dmvvclo01apxl" path="res://shooter.gd" id="2_e51mn"]
 [ext_resource type="Script" uid="uid://bwdfyfwl6vqks" path="res://player/components/parry_component.gd" id="2_httow"]
 [ext_resource type="PackedScene" uid="uid://bqqpu30qxte0q" path="res://projectile.tscn" id="3_snpff"]
+[ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_unidx"]
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]
 [ext_resource type="Script" uid="uid://bpccxxlpeyb43" path="res://ui/projectile_warning.gd" id="6_n2kti"]
 
@@ -23,6 +24,9 @@ height = 1.6
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_pnrag"]
 size = Vector3(1.8, 1.8, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tnlha"]
+size = Vector3(1.6, 1.4, 1.8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pnrag"]
 
@@ -69,6 +73,13 @@ script = ExtResource("2_httow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player/ParryHitbox" unique_id=1944802550]
 shape = SubResource("BoxShape3D_pnrag")
+
+[node name="MeleeHitbox" type="Area3D" parent="Player" unique_id=1529461499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+script = ExtResource("3_unidx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/MeleeHitbox" unique_id=1590841933]
+shape = SubResource("BoxShape3D_tnlha")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1151762135]
 transform = Transform3D(0.8660254, 0.43301272, -0.25, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.4330127, 0, 0, 0)
