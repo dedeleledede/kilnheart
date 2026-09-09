@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://bg3nmbtpk8d5o"]
 
 [ext_resource type="Script" uid="uid://e6povdh3j5p8" path="res://player/player.gd" id="1_58akw"]
-[ext_resource type="Script" uid="uid://dmvvclo01apxl" path="res://shooter.gd" id="2_e51mn"]
+[ext_resource type="Script" uid="uid://dmvvclo01apxl" path="res://combat/shooter.gd" id="2_e51mn"]
 [ext_resource type="Script" uid="uid://bwdfyfwl6vqks" path="res://player/components/parry_component.gd" id="2_httow"]
-[ext_resource type="PackedScene" uid="uid://bqqpu30qxte0q" path="res://projectile.tscn" id="3_snpff"]
+[ext_resource type="PackedScene" uid="uid://bqqpu30qxte0q" path="res://combat/projectiles/projectile.tscn" id="3_snpff"]
 [ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_unidx"]
 [ext_resource type="Script" uid="uid://bchjqkkcbgoaw" path="res://player/components/attack_feedback.gd" id="4_u62bo"]
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]

@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://drulwy04kwtmc"]
+
+[ext_resource type="Script" uid="uid://bqfnbt2lqdynv" path="res://rooms/room_segment.gd" id="1_7l3pp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_q8x1j"]
+size = Vector3(14, 1, 80)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pkfc7"]
+size = Vector3(14, 1, 80)
+
+[node name="RoomTest01" type="Node3D" unique_id=1623736087]
+script = ExtResource("1_7l3pp")
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1927427117]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=1412504385]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_q8x1j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=535117149]
+shape = SubResource("BoxShape3D_pkfc7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=574437025]
+transform = Transform3D(0.8660254, 0.43301272, -0.25, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.4330127, 0, 0, 0)
+
+[node name="WallLeft" type="CSGBox3D" parent="." unique_id=615325485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 2, 0)
+use_collision = true
+size = Vector3(1, 4, 80)
+
+[node name="WallRight" type="CSGBox3D" parent="." unique_id=711783214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 2, 0)
+use_collision = true
+size = Vector3(1, 4, 80)
+
+[node name="BlockRight" type="CSGBox3D" parent="." unique_id=1287640141 groups=["fatal_obstacle"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.218607, 1.5, 25)
+use_collision = true
+size = Vector3(14, 3, 2)
+
+[node name="EntryMarker" type="Marker3D" parent="." unique_id=281181694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="ExitMarker" type="Marker3D" parent="." unique_id=1742445890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)

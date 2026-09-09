@@ -157,11 +157,15 @@ func can_keep_current_target() -> bool:
 	)
 
 
-func is_target_available(target: Node3D) -> bool:
+func is_target_available(target: Variant) -> bool:
 	if not is_instance_valid(target):
 		return false
 
-	var target_position := get_target_position(target)
+	if not (target is Node3D):
+		return false
+
+	var target_node := target as Node3D
+	var target_position := get_target_position(target_node)
 
 	if camera.is_position_behind(target_position):
 		return false
@@ -180,7 +184,7 @@ func is_target_available(target: Node3D) -> bool:
 
 	return Rect2(
 		Vector2.ZERO,
-		size
+		size	
 	).has_point(screen_position)
 
 
