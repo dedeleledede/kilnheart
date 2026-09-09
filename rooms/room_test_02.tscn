@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://drulwy04kwtmc"]
+[gd_scene format=3 uid="uid://dj0tfd8huocku"]
 
-[ext_resource type="Script" uid="uid://bqfnbt2lqdynv" path="res://rooms/room_segment.gd" id="1_7l3pp"]
+[ext_resource type="Script" uid="uid://bqfnbt2lqdynv" path="res://rooms/room_segment.gd" id="1_k7jes"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_q8x1j"]
 size = Vector3(14, 1, 80)
@@ -12,7 +12,7 @@ size = Vector3(14, 1, 80)
 size = Vector3(14, 4, 2)
 
 [node name="RoomTest01" type="Node3D" unique_id=1623736087]
-script = ExtResource("1_7l3pp")
+script = ExtResource("1_k7jes")
 
 [node name="Floor" type="StaticBody3D" parent="." unique_id=1927427117]
 
@@ -34,7 +34,7 @@ use_collision = true
 size = Vector3(1, 4, 80)
 
 [node name="BlockRight" type="CSGBox3D" parent="." unique_id=1287640141 groups=["fatal_obstacle"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0115433, 1.5, 25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7407589, 1.5, 25)
 use_collision = true
 size = Vector3(14, 3, 2)
 

@@ -27,6 +27,7 @@ func _ready() -> void:
 	collision_layer = 1 << 1
 	collision_mask = 1 << 0
 
+	add_to_group("player")
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
