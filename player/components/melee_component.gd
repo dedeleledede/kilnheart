@@ -30,9 +30,12 @@ signal combo_finished
 	2
 ])
 
+@export var combo_window_duration := 0.75
+
 var attacking := false
 var next_attack_queued := false
 
+var combo_window_time_left := 0.0
 var combo_step := -1
 var attack_time := 0.0
 var attack_count := 0
@@ -58,6 +61,15 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if not attacking and combo_step >= 0:
+		combo_window_time_left = max(
+			combo_window_time_left - delta,
+			0.0
+		)
+
+		if combo_window_time_left <= 0.0:
+			reset_combo()
+
 	if Input.is_action_just_pressed("attack"):
 		handle_attack_input()
 
@@ -80,12 +92,20 @@ func _physics_process(delta: float) -> void:
 
 
 func handle_attack_input() -> void:
-	if not attacking:
-		start_attack(0)
+	if attacking:
+		if combo_step < attack_count - 1:
+			next_attack_queued = true
+
 		return
 
-	if combo_step < attack_count - 1:
-		next_attack_queued = true
+	if (
+		combo_step >= 0
+		and combo_step < attack_count - 1
+		and combo_window_time_left > 0.0
+	):
+		start_attack(combo_step + 1)
+	else:
+		start_attack(0)
 
 
 func start_attack(new_combo_step: int) -> void:
@@ -132,11 +152,14 @@ func finish_current_attack() -> void:
 
 	attacking = false
 	next_attack_queued = false
-	combo_step = -1
 	attack_time = 0.0
-
 	hit_targets.clear()
-	combo_finished.emit()
+
+	if combo_step >= attack_count - 1:
+		reset_combo()
+		return
+
+	combo_window_time_left = combo_window_duration
 
 
 func has_valid_attack_data() -> bool:
@@ -148,3 +171,15 @@ func has_valid_attack_data() -> bool:
 		and active_window_ends.size() == count
 		and attack_damages.size() == count
 	)	
+
+
+func reset_combo() -> void:
+	attacking = false
+	next_attack_queued = false
+
+	combo_step = -1
+	attack_time = 0.0
+	combo_window_time_left = 0.0
+
+	hit_targets.clear()
+	combo_finished.emit()
