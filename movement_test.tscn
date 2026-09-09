@@ -7,9 +7,12 @@
 [ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_unidx"]
 [ext_resource type="Script" uid="uid://bchjqkkcbgoaw" path="res://player/components/attack_feedback.gd" id="4_u62bo"]
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]
+[ext_resource type="Script" uid="uid://bqb50cor68osw" path="res://player/components/shoot_component.gd" id="5_xbnuk"]
+[ext_resource type="PackedScene" uid="uid://bo6273rh8gts4" path="res://combat/player_projectile.tscn" id="6_ehb08"]
 [ext_resource type="Script" uid="uid://bpccxxlpeyb43" path="res://ui/projectile_warning.gd" id="6_n2kti"]
 [ext_resource type="Script" uid="uid://dujc3cvmuanoe" path="res://combat/health_component.gd" id="8_dsagd"]
 [ext_resource type="Script" uid="uid://dtiqkpa2pspjt" path="res://combat/damage_feedback.gd" id="9_0jnl2"]
+[ext_resource type="Script" uid="uid://klaliwu04jbh" path="res://ui/aim_assist.gd" id="13_epw4j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h37ey"]
 size = Vector3(14, 1, 80)
@@ -87,6 +90,13 @@ shape = SubResource("BoxShape3D_tnlha")
 [node name="AttackFeedback" type="Node" parent="Player" unique_id=496532243]
 script = ExtResource("4_u62bo")
 
+[node name="ShootComponent" type="Node3D" parent="Player" unique_id=1134482003]
+script = ExtResource("5_xbnuk")
+projectile_scene = ExtResource("6_ehb08")
+
+[node name="Muzzle" type="Marker3D" parent="Player/ShootComponent" unique_id=587121657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1151762135]
 transform = Transform3D(0.8660254, 0.43301272, -0.25, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.4330127, 0, 0, 0)
 
@@ -136,6 +146,9 @@ max_health = 3
 [node name="DamageFeedback" type="Node" parent="Shooter" unique_id=714564949]
 script = ExtResource("9_0jnl2")
 
+[node name="AimPoint" type="Marker3D" parent="Shooter" unique_id=1445797191]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1010109709]
 
 [node name="ProjectileWarning" type="Label" parent="HUD" unique_id=1719457906]
@@ -144,3 +157,13 @@ offset_bottom = 23.0
 script = ExtResource("6_n2kti")
 camera_path = NodePath("../../Player/CameraPivot/SpringArm3D/Camera3D")
 player_path = NodePath("../../Player")
+
+[node name="AimAssist" type="Control" parent="HUD" unique_id=771282572]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("13_epw4j")

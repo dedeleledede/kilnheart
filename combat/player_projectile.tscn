@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bo6273rh8gts4"]
+
+[ext_resource type="Script" uid="uid://cwrgyvo5ejeyp" path="res://combat/player_projectile.gd" id="1_geyys"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pnrag"]
+radius = 0.14
+height = 0.28
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h37ey"]
+radius = 0.15
+
+[node name="PlayerProjectile" type="Area3D" unique_id=452909697]
+script = ExtResource("1_geyys")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=289625770]
+mesh = SubResource("SphereMesh_pnrag")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1891347367]
+shape = SubResource("SphereShape3D_h37ey")

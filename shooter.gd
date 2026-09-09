@@ -15,6 +15,8 @@ func _ready() -> void:
 		"died",
 		die
 	)
+	
+	add_to_group("aim_target")
 
 
 func _process(delta: float) -> void:
@@ -59,9 +61,14 @@ func take_hit() -> void:
 
 func die() -> void:
 	set_process(false)
+	remove_from_group("aim_target")
 
 	await get_tree().create_timer(
 		0.22
 	).timeout
 
 	queue_free()
+
+
+func get_aim_position() -> Vector3:
+	return $AimPoint.global_position

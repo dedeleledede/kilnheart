@@ -35,3 +35,9 @@ func deal_damage(damage: int) -> void:
 		)
 	elif enemy.has_method("take_hit"):
 		enemy.call("take_hit")
+
+
+func receive_player_projectile(
+	damage: int
+) -> void:
+	deal_damage(damage)
