@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://ckv4usn2www3a"]
+
+[ext_resource type="Script" uid="uid://e6povdh3j5p8" path="res://player/player.gd" id="1_g6k8r"]
+[ext_resource type="Script" uid="uid://bwdfyfwl6vqks" path="res://player/components/parry_component.gd" id="2_boad6"]
+[ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_rgyib"]
+[ext_resource type="Script" uid="uid://bchjqkkcbgoaw" path="res://player/components/attack_feedback.gd" id="4_hg6s5"]
+[ext_resource type="Script" uid="uid://bqb50cor68osw" path="res://player/components/shoot_component.gd" id="5_8t03j"]
+[ext_resource type="PackedScene" uid="uid://bo6273rh8gts4" path="res://combat/player_projectile.tscn" id="6_2ieo8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pnrag"]
+radius = 0.45
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h37ey"]
+radius = 0.35
+height = 1.6
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pnrag"]
+size = Vector3(1.8, 1.8, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tnlha"]
+size = Vector3(1.6, 1.4, 1.8)
+
+[node name="Player" type="CharacterBody3D" unique_id=1569216048]
+collision_layer = 2
+script = ExtResource("1_g6k8r")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1055300885]
+mesh = SubResource("CapsuleMesh_pnrag")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1988333168]
+shape = SubResource("CapsuleShape3D_h37ey")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=131070047]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot" unique_id=1363240564]
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0)
+spring_length = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D" unique_id=1371100083]
+current = true
+
+[node name="ParryHitbox" type="Area3D" parent="." unique_id=31242002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85)
+collision_layer = 32
+collision_mask = 16
+script = ExtResource("2_boad6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ParryHitbox" unique_id=822131218]
+shape = SubResource("BoxShape3D_pnrag")
+
+[node name="MeleeHitbox" type="Area3D" parent="." unique_id=711687813]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+script = ExtResource("3_rgyib")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHitbox" unique_id=1361570102]
+shape = SubResource("BoxShape3D_tnlha")
+
+[node name="AttackFeedback" type="Node" parent="." unique_id=968416467]
+script = ExtResource("4_hg6s5")
+
+[node name="ShootComponent" type="Node3D" parent="." unique_id=618917205]
+script = ExtResource("5_8t03j")
+projectile_scene = ExtResource("6_2ieo8")
+
+[node name="Muzzle" type="Marker3D" parent="ShootComponent" unique_id=1677266891]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)

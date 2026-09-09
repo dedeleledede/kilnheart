@@ -1,38 +1,18 @@
 [gd_scene format=3 uid="uid://bg3nmbtpk8d5o"]
 
-[ext_resource type="Script" uid="uid://e6povdh3j5p8" path="res://player/player.gd" id="1_58akw"]
+[ext_resource type="PackedScene" uid="uid://ckv4usn2www3a" path="res://player/player.tscn" id="1_unidx"]
 [ext_resource type="Script" uid="uid://dmvvclo01apxl" path="res://combat/shooter.gd" id="2_e51mn"]
-[ext_resource type="Script" uid="uid://bwdfyfwl6vqks" path="res://player/components/parry_component.gd" id="2_httow"]
 [ext_resource type="PackedScene" uid="uid://bqqpu30qxte0q" path="res://combat/projectiles/projectile.tscn" id="3_snpff"]
-[ext_resource type="Script" uid="uid://b1ghlrnt0q6es" path="res://player/components/melee_component.gd" id="3_unidx"]
-[ext_resource type="Script" uid="uid://bchjqkkcbgoaw" path="res://player/components/attack_feedback.gd" id="4_u62bo"]
 [ext_resource type="Script" uid="uid://dkbegr6stbj7j" path="res://combat/enemy_hurtbox.gd" id="5_f07rf"]
-[ext_resource type="Script" uid="uid://bqb50cor68osw" path="res://player/components/shoot_component.gd" id="5_xbnuk"]
-[ext_resource type="PackedScene" uid="uid://bo6273rh8gts4" path="res://combat/player_projectile.tscn" id="6_ehb08"]
-[ext_resource type="Script" uid="uid://bpccxxlpeyb43" path="res://ui/projectile_warning.gd" id="6_n2kti"]
+[ext_resource type="PackedScene" uid="uid://nf0erhu5c7x5" path="res://ui/hud.tscn" id="7_u62bo"]
 [ext_resource type="Script" uid="uid://dujc3cvmuanoe" path="res://combat/health_component.gd" id="8_dsagd"]
 [ext_resource type="Script" uid="uid://dtiqkpa2pspjt" path="res://combat/damage_feedback.gd" id="9_0jnl2"]
-[ext_resource type="Script" uid="uid://klaliwu04jbh" path="res://ui/aim_assist.gd" id="13_epw4j"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h37ey"]
 size = Vector3(14, 1, 80)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7uan1"]
 size = Vector3(14, 1, 80)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_pnrag"]
-radius = 0.45
-height = 1.8
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h37ey"]
-radius = 0.35
-height = 1.6
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pnrag"]
-size = Vector3(1.8, 1.8, 1.4)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_tnlha"]
-size = Vector3(1.6, 1.4, 1.8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pnrag"]
 
@@ -50,52 +30,8 @@ mesh = SubResource("BoxMesh_h37ey")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1915004899]
 shape = SubResource("BoxShape3D_7uan1")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1211583342]
+[node name="Player" parent="." unique_id=1569216048 instance=ExtResource("1_unidx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 40)
-collision_layer = 2
-script = ExtResource("1_58akw")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1972886877]
-mesh = SubResource("CapsuleMesh_pnrag")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=994821817]
-shape = SubResource("CapsuleShape3D_h37ey")
-
-[node name="CameraPivot" type="Node3D" parent="Player" unique_id=3794029]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-
-[node name="SpringArm3D" type="SpringArm3D" parent="Player/CameraPivot" unique_id=137490462]
-transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0)
-spring_length = 5.0
-
-[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot/SpringArm3D" unique_id=1550934663]
-current = true
-
-[node name="ParryHitbox" type="Area3D" parent="Player" unique_id=1236992701]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85)
-collision_layer = 32
-collision_mask = 16
-script = ExtResource("2_httow")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/ParryHitbox" unique_id=1944802550]
-shape = SubResource("BoxShape3D_pnrag")
-
-[node name="MeleeHitbox" type="Area3D" parent="Player" unique_id=1529461499]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
-script = ExtResource("3_unidx")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/MeleeHitbox" unique_id=1590841933]
-shape = SubResource("BoxShape3D_tnlha")
-
-[node name="AttackFeedback" type="Node" parent="Player" unique_id=496532243]
-script = ExtResource("4_u62bo")
-
-[node name="ShootComponent" type="Node3D" parent="Player" unique_id=1134482003]
-script = ExtResource("5_xbnuk")
-projectile_scene = ExtResource("6_ehb08")
-
-[node name="Muzzle" type="Marker3D" parent="Player/ShootComponent" unique_id=587121657]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, -1)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1151762135]
 transform = Transform3D(0.8660254, 0.43301272, -0.25, 0, 0.49999997, 0.86602545, 0.5, -0.75, 0.4330127, 0, 0, 0)
@@ -149,21 +85,4 @@ script = ExtResource("9_0jnl2")
 [node name="AimPoint" type="Marker3D" parent="Shooter" unique_id=1445797191]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1010109709]
-
-[node name="ProjectileWarning" type="Label" parent="HUD" unique_id=1719457906]
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("6_n2kti")
-camera_path = NodePath("../../Player/CameraPivot/SpringArm3D/Camera3D")
-player_path = NodePath("../../Player")
-
-[node name="AimAssist" type="Control" parent="HUD" unique_id=771282572]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("13_epw4j")
+[node name="HUD" parent="." unique_id=1155331833 instance=ExtResource("7_u62bo")]
